@@ -15,8 +15,8 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
         <>
             <Header />
             <div className="flex">
-                {pathname !== "/create/item" && <Sidebar />}
-                <main className="flex-1 p-6">{children}</main>
+                {pathname !== "/create/item" && !pathname.startsWith("/listings/") && <Sidebar />}
+                <main className="flex-1 pt-0.5 pb-6 md:p-6">{children}</main>
             </div>
         </>
     );
