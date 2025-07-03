@@ -8,6 +8,15 @@ import Image from "next/image";
 import { ModeToggle } from "../theme-toggle";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
+import {
+    Drawer,
+    DrawerContent,
+    DrawerDescription,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger,
+} from "../ui/drawer";
+import { categories } from "@/lib/categories";
 
 interface SearchResult {
     id: string;
@@ -175,6 +184,41 @@ export default function Header() {
                             For you
                         </Button>
                     </Link>
+                    <Drawer>
+                        <DrawerTrigger asChild>
+                            <Button
+                                variant="ghost"
+                                size="sm"
+                                className={
+                                    pathname.startsWith("/category") ? "rounded-full bg-accent" : ""
+                                }
+                            >
+                                Categories
+                            </Button>
+                        </DrawerTrigger>
+                        <DrawerContent>
+                            <div className="mx-auto w-full max-w-sm">
+                                <DrawerHeader className="text-center">
+                                    <DrawerTitle>Categories</DrawerTitle>
+                                    <DrawerDescription>
+                                        Browse products by category
+                                    </DrawerDescription>
+                                </DrawerHeader>
+                                <div className="p-4 pb-8 space-y-2">
+                                    {categories.map((category, index) => (
+                                        <Link key={index} href={`/category/${category.value}`}>
+                                            <Button
+                                                variant="ghost"
+                                                className="w-full justify-start text-left h-12 px-4 hover:bg-accent rounded-lg transition-colors"
+                                            >
+                                                {category.name}
+                                            </Button>
+                                        </Link>
+                                    ))}
+                                </div>
+                            </div>
+                        </DrawerContent>
+                    </Drawer>
                 </nav>
             </header>
 
