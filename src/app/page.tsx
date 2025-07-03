@@ -4,6 +4,7 @@ import supabase from "@/lib/supabase";
 import Link from "next/dist/client/link";
 import { useEffect, useState } from "react";
 import { Listing } from "@/lib/types/Listing";
+import Image from "next/image";
 
 export default function Home() {
     const [isLoading, setIsLoading] = useState(true);
@@ -49,7 +50,7 @@ export default function Home() {
 
     return (
         <article className="max-w-7xl mx-auto">
-            <h4 className="text-base md:text-2xl px-5 font-bold md:mb-4">Today's picks</h4>
+            <h4 className="text-base md:text-2xl px-5 font-bold md:mb-4">Today&apos;s picks</h4>
             {isLoading ? (
                 <section className="grid grid-cols-2 sm:grid-cols-3 gap-0.5 lg:grid-cols-5 md:gap-4">
                     {Array.from({ length: 8 }).map((_, index) => (
@@ -80,10 +81,12 @@ export default function Home() {
                                 className="md:border md:rounded-lg py-2 md:p-4 hover:shadow-md transition-shadow"
                             >
                                 {listing.image_url && (
-                                    <img
+                                    <Image
                                         src={listing.image_url}
                                         alt={listing.title}
                                         className="w-full h-48 object-cover md:rounded mb-3"
+                                        width={200}
+                                        height={200}
                                     />
                                 )}
                                 <span className="md:hidden text-xs pl-1 pr-2 mb-1 line-clamp-1">

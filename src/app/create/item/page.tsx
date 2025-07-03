@@ -15,6 +15,7 @@ import { useState, useEffect } from "react";
 import { categories } from "@/lib/categories";
 import { Button } from "@/components/ui/button";
 import { humanizeSlug } from "@/lib/utils";
+import Image from "next/image";
 
 interface FormData {
     title: string;
@@ -214,10 +215,12 @@ export default function CreateItemListing() {
                         >
                             {imagePreview ? (
                                 <div className="relative w-full h-full">
-                                    <img
+                                    <Image
                                         src={imagePreview}
                                         alt="Preview"
                                         className="w-full h-full object-cover rounded"
+                                        width={300}
+                                        height={200}
                                     />
                                     <button
                                         type="button"
@@ -366,10 +369,12 @@ export default function CreateItemListing() {
                         <p className="text-sm mb-2 text-foreground">Preview</p>
                         <div className="border border-border rounded-lg h-full bg-muted/20 flex items-center justify-center overflow-hidden">
                             {imagePreview ? (
-                                <img
+                                <Image
                                     src={imagePreview}
                                     alt="Listing preview"
                                     className="w-full h-full object-cover rounded"
+                                    width={300}
+                                    height={200}
                                 />
                             ) : (
                                 <p className="text-muted-foreground">

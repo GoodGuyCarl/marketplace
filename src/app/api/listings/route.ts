@@ -56,7 +56,8 @@ export async function GET(request: NextRequest) {
                 "Content-Type": "application/json",
             },
         });
-    } catch (error) {
+    } catch (err) {
+        console.error("Error fetching listings:", err);
         return new Response(JSON.stringify({ error: "An unexpected error occurred." }), {
             status: 500,
         });
@@ -97,7 +98,8 @@ export async function POST(request: NextRequest) {
                 "Content-Type": "application/json",
             },
         });
-    } catch (error) {
+    } catch (err) {
+        console.error("Error creating listing:", err);
         return new Response(JSON.stringify({ error: "An unexpected error occurred." }), {
             status: 500,
         });

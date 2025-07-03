@@ -9,7 +9,6 @@ import {
     Plus,
     Search,
     Shirt,
-    ShoppingBasket,
     Smartphone,
     Store,
     Tablets,
@@ -23,6 +22,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 
 interface SearchResult {
     id: string;
@@ -225,9 +225,11 @@ export default function Sidebar() {
                                     >
                                         <div className="flex items-start space-x-3">
                                             {item.image_url ? (
-                                                <img
+                                                <Image
                                                     src={item.image_url}
                                                     alt={item.title}
+                                                    width={48}
+                                                    height={48}
                                                     className="w-12 h-12 object-cover rounded-lg flex-shrink-0"
                                                 />
                                             ) : (
@@ -252,7 +254,7 @@ export default function Sidebar() {
                                             onClick={() => setShowResults(false)}
                                             className="block p-2 text-center text-sm text-primary hover:bg-muted rounded-lg transition-colors"
                                         >
-                                            View all results for "{searchQuery}"
+                                            View all results for &quot;{searchQuery}&quot;
                                         </Link>
                                     </div>
                                 )}
@@ -260,7 +262,7 @@ export default function Sidebar() {
                         ) : searchQuery.length >= 3 && !isSearching ? (
                             <div className="p-4 text-center text-muted-foreground">
                                 <Store className="h-8 w-8 mx-auto mb-2 opacity-50" />
-                                <p className="text-sm">No items found for "{searchQuery}"</p>
+                                <p className="text-sm">No items found for &quot;{searchQuery}&quot;</p>
                                 <p className="text-xs mt-1">Try searching with different keywords</p>
                             </div>
                         ) : searchQuery.length > 0 && searchQuery.length < 3 ? (

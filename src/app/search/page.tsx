@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Search, Store } from "lucide-react";
 import Link from "next/link";
 import { Listing } from "@/lib/types/Listing";
+import Image from "next/image";
 
-export default function SearchPage() {
+function SearchPageContent() {
     const searchParams = useSearchParams();
     const query = searchParams.get("q") || "";
     const [results, setResults] = useState<Listing[]>([]);
@@ -94,9 +95,11 @@ export default function SearchPage() {
                             >
                                 <div className="aspect-square relative overflow-hidden">
                                     {item.image_url ? (
-                                        <img
+                                        <Image
                                             src={item.image_url}
                                             alt={item.title}
+                                            width={300}
+                                            height={300}
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                         />
                                     ) : (
@@ -127,7 +130,7 @@ export default function SearchPage() {
                     <Store className="h-16 w-16 mx-auto mb-4 text-muted-foreground opacity-50" />
                     <h2 className="text-xl font-semibold mb-2">No results found</h2>
                     <p className="text-muted-foreground mb-4">
-                        No items found for "{query}". Try searching with different keywords.
+                        No items found for &quot;{query}&quot;. Try searching with different keywords.
                     </p>
                     <Link
                         href="/"
@@ -138,5 +141,21 @@ export default function SearchPage() {
                 </div>
             ) : null}
         </div>
+    );
+}
+
+export default function SearchPage() {
+    return (
+        <Suspense fallback={
+            <div className="max-w-7xl mx-auto px-4 py-8">
+                <div className="text-center">
+                    <Search className="h-16 w-16 mx-auto mb-4 text-muted-foreground opacity-50 animate-pulse" />
+                    <h1 className="text-2xl font-bold mb-2">Loading...</h1>
+                    <p className="text-muted-foreground">Preparing search page</p>
+                </div>
+            </div>
+        }>
+            <SearchPageContent />
+        </Suspense>
     );
 }

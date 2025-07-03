@@ -13,6 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import Image from "next/image";
 
 interface FormData {
     buyer_email: string;
@@ -115,10 +116,12 @@ export default function ListingPage() {
                         ratio={9 / 16}
                         className="rounded-lg overflow-hidden bg-foreground/25 border border-border"
                     >
-                        <img
+                        <Image
                             src={listing?.image_url || "https://placehold.co/600"}
-                            alt={listing?.title}
+                            alt={listing?.title || "Listing Image"}
                             className="w-full h-full object-contain object-center"
+                            width={600}
+                            height={900}
                         />
                     </AspectRatio>
                     <div className="flex flex-col">

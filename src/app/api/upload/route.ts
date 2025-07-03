@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
         const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
 
         // Upload to Supabase storage
-        const { data: uploadData, error: uploadError } = await supabase.storage
+        const { error: uploadError } = await supabase.storage
             .from("listing-images")
             .upload(fileName, file);
 

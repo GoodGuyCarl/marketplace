@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { Listing } from "@/lib/types/Listing";
 import { humanizeSlug } from "@/lib/utils";
+import Image from "next/image";
 
 const fetchListingsByCategory = async (category: string): Promise<Listing[] | null> => {
     try {
@@ -88,10 +89,12 @@ export default function CategoryPage() {
                             className="md:border md:rounded-lg py-2 md:p-4 hover:shadow-md transition-shadow"
                         >
                             {listing.image_url && (
-                                <img
+                                <Image
                                     src={listing.image_url}
                                     alt={listing.title}
                                     className="w-full h-48 object-cover md:rounded mb-3"
+                                    width={300}
+                                    height={200}
                                 />
                             )}
                             <span className="md:hidden text-xs pl-1 pr-2 mb-1 line-clamp-1">
